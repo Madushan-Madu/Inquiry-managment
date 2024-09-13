@@ -1,0 +1,73 @@
+/* Container */
+.hr-manager-queries-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Headings */
+  .hr-manager-queries-container h2,
+  .hr-manager-queries-container h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Tables */
+  .hr-manager-queries-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .hr-manager-queries-container th,
+  .hr-manager-queries-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .hr-manager-queries-container th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  /* Buttons */
+  .hr-manager-queries-container button {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hr-manager-queries-container button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Link Button */
+  .hr-manager-queries-container .reply-link {
+    margin-right: 10px;
+  }
+  
+  .hr-manager-queries-container .reply-link button {
+    background-color: #2196F3;
+  }
+  
+  .hr-manager-queries-container .reply-link button:hover {
+    background-color: #1976D2;
+  }
+  
+  /* Delete Button */
+  .hr-manager-queries-container .delete-button {
+    background-color: #f44336;
+  }
+  
+  .hr-manager-queries-container .delete-button:hover {
+    background-color: #e53935;
+  }
+  
