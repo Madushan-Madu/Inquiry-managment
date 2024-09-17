@@ -70,4 +70,11 @@
   .hr-manager-queries-container .delete-button:hover {
     background-color: #e53935;
   }
+  .icon-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3px;
+    font-size: 15px;
+  }
   
