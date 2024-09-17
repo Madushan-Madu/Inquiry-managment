@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/UserQueries.css';
+import { deleteToastify } from './ToastMessages';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+
 
 const UserQueries = () => {
   const [inquiries, setInquiries] = useState([]);
   const [replies, setReplies] = useState([]);
   const [error, setError] = useState('');
-
+const navigate = useNavigate();
   useEffect(() => {
     const fetchInquiries = async () => {
       try {
@@ -35,7 +41,9 @@ const UserQueries = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/inquiries/${id}`);
+      await axios.delete(`http://localhost:5000/inquiries/${id}`)
+        deleteToastify("Deleted successfully!")
+
       setInquiries(inquiries.filter(inquiry => inquiry._id !== id));
     } catch (error) {
       console.error('Error deleting inquiry:', error);
@@ -52,20 +60,24 @@ const UserQueries = () => {
   }, {});
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
-      <h2>My Queries</h2>
+    <div className=' container d-flex justify-content-center ' style={{ height:'auto' }}>
+      <div className=' w-80   p-3 px-5 h-auto' >
+      <p className=' mt-3' style={{fontWeight:600,fontSize:'50px',color:"#1c71bb"}}>My Queries</p>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid black', padding: '8px' }}>User Name</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>Email</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>Message</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>Replies</th>
-            <th style={{ border: '1px solid black', padding: '8px' }}>Action</th>
+      <div className=' d-flex align-items-end justify-content-end' style={{width:"100%"}}>
+        <button className=' btn btn-success' onClick={()=>{navigate("/")}} style={{backgroundColor:"#1ea524"}}><AddIcon />{" "} Add</button>
+      </div>
+      <table className=' table rounded-lg mt-5 mb-3' style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead className=' '>
+          <tr className=''>
+            <th className=' bg-primary text-white' >User Name</th>
+            <th className=' bg-primary text-white' >Email</th>
+            <th className=' bg-primary text-white' >Message</th>
+            <th className=' bg-primary text-white' >Replies</th>
+            <th className=' bg-primary text-white' style={{minWidth:"230px"}}>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className=' table-hover'>
           {inquiries.length === 0 ? (
             <tr>
               <td colSpan="5" style={{ textAlign: 'center', padding: '8px' }}>No inquiries found</td>
@@ -76,10 +88,10 @@ const UserQueries = () => {
 
               return (
                 <tr key={inquiry._id}>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{inquiry.username}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{inquiry.email}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{inquiry.message}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                  <td >{inquiry.username}</td>
+                  <td >{inquiry.email}</td>
+                  <td >{inquiry.message}</td>
+                  <td >
                     {hasReplies ? (
                       <ul style={{ listStyleType: 'none', padding: '0' }}>
                         {repliesByInquiryId[inquiry._id].map(reply => (
@@ -90,24 +102,39 @@ const UserQueries = () => {
                       <span>No replies yet</span>
                     )}
                   </td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                   <td >
                     {!hasReplies ? (
                       <>
                         <Link to={`/edit-inquiry/${inquiry._id}`} style={{ marginRight: '8px' }}>
-                          <button>Edit</button>
+                          <button className="icon-btn btn btn-warning"><EditNoteIcon/>{" "} Edit</button>
                         </Link>
-                        <button onClick={() => handleDelete(inquiry._id)}>Delete</button>
+                        <button className="icon-btn btn btn-danger" onClick={() => handleDelete(inquiry._id)}><DeleteIcon />{" "}Delete</button>
                       </>
                     ) : (
                       <span>Cannot Edit/Delete (Replied)</span>
                     )}
-                  </td>
+                  </td> 
                 </tr>
               );
             })
           )}
         </tbody>
       </table>
+      </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="light"
+        transition={Bounce}
+        
+      />{" "}
     </div>
   );
 };

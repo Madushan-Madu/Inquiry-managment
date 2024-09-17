@@ -5,6 +5,7 @@ import UserQueries from './components/UserQueries';
 import HRManagerQueries from './components/HRManagerQueries'; // Import the HRManagerQueries component
 import ReplyForm from './components/ReplyForm'; // Import the ReplyForm component
 import EditInquiryForm from './components/EditInquiryForm'; // Import the EditInquiryForm component
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (

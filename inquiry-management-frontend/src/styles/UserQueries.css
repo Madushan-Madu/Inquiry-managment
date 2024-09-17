@@ -40,6 +40,7 @@
   th {
     background-color: #007bff;
     color: white;
+    min-width: 150px
   }
   
   td {

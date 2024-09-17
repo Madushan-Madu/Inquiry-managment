@@ -6,6 +6,8 @@ const Inquiry = require('../models/Inquiry');
 router.post('/', async (req, res) => {
   try {
     const newInquiry = new Inquiry(req.body);
+    console.log(newInquiry,"new inq");
+    
     const inquiry = await newInquiry.save();
     res.status(201).json(inquiry);
   } catch (err) {
