@@ -18,8 +18,9 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/inquiry-man
   .catch(err => console.log(err));
 
 // Routes
-app.use('/inquiries', require('./routes/inquiryRoutes')); // Updated route path
-app.use('/replies', require('./routes/replies'));    // New route for replies
+app.use('/inquiries', require('./routes/inquiryRoutes')); // Existing inquiry routes
+app.use('/replies', require('./routes/replies')); // Existing replies route
+app.use('/reports', require('./routes/reports')); // New route for reports
 
 // Error handling middleware (optional)
 app.use((err, req, res, next) => {
